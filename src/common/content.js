@@ -32,23 +32,28 @@ console.log('content script running');
 		return parser;
 	}
 	
-	function urlHost(str) {
-		parser = urlParser(str);
-		return parser.hostname;
+	function isUrl(str) {
+		var parser = urlParser(str);
+		console.log(parser);
+		return parser.scheme && parser.host;
 	}
 	
 	function getTrailingUrl(str) {
-		var parts = str.split(' ');
-		var lastSegment = parts.pop();
-		var url;
-
-		if (urlHost(lastSegment)) {
+		var parts,
+				lastSegment,
+				url;
+		// TODO: fix this, not working
+		parts = str.split(/\s/);
+		parts = parts.filter(function (i) { return i !== ''; });
+		lastSegment = parts.pop();
+		
+		if (isUrl(lastSegment)) {
 			url = lastSegment;
-		} else if (lastSegment === '(' && urlHost(lastSegment.trimChars('()'))) {
+		} else if (lastSegment.charAt(0) === '(' && isUrl(lastSegment.trimChars('()'))) {
 			url = lastSegment.trimChars('()');
 		}
 		
-		if (url !== null || url !== '') {
+		if (url !== null && url !== '' && url !== undefined) {
 			url = web_address_to_uri(url, true);
 			return url.trim();
 		}
@@ -59,6 +64,8 @@ console.log('content script running');
 	for (var i=0;i<tweets.length;i++) {
 		tweetEl = tweets[i];
 		tweetText = tweetEl.querySelector('.tweet-text');
+		console.log('TEXT IS: ' + stripHashtags(tweetText.innerText));
 		console.log(getTrailingUrl(stripHashtags(tweetText.innerText)));
+		console.log(' ');
 	}
 }(document));
