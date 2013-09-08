@@ -7,7 +7,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Weave</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.kangoextensions.weave</string>
+	<string>com.indiewebcamp.weave</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
