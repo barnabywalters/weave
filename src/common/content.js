@@ -10,9 +10,57 @@ console.log('content script running');
 			tweetEl,
 			tweetText;
 	
+	if (!String.prototype.trim) {
+		String.prototype.trim = function () {
+			return this.replace(/^\s+|\s+$/g, '');
+		};
+	}
+	
+	String.prototype.trimChars = function (chars) {
+		var match = '(' + chars.split('').join('|') + ')';
+		return this.replace(match);
+	}
+	
+	function stripHashtags(str) {
+		return str.replace(/#[a-zA-Z0-9]+/i, '');
+	}
+	
+	function urlParser(str) {
+		var parser = document.createElement('a');
+		parser.href = str;
+		return parser;
+	}
+	
+	function urlHost(str) {
+		parser = urlParser(str);
+		return parser.hostname;
+	}
+	
+	function getTrailingUrl(str) {
+		var parts = str.split(' ');
+		var lastSegment = parts.pop();
+		var url;
+
+		if (urlHost(lastSegment)) {
+			url = lastSegment;
+		} else if (lastSegment === '(' && urlHost(lastSegment.trim('()'))) {
+			url = lastSegment.trim('()');
+		}
+
+		if (isset($url)) {
+			ob_start();
+			$url = web_address_to_uri($url, true);
+			ob_end_clean();
+
+			return trim(cleanString($url));
+		}
+
+		return null;
+	}
+	
 	for (var i=0;i<tweets.length;i++) {
 		tweetEl = tweets[i];
 		tweetText = tweetEl.querySelector('.tweet-text');
-		console.log(tweetText);
+		console.log(getTrailingUrl(stripHashtags(tweetText.innerText)));
 	}
 }(document));
