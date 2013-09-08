@@ -17,10 +17,14 @@ console.log('content script running');
 		};
 	}
 	
-	String.prototype.trimChars = function (chars) {
-		var match = '(' + chars.split('').join('|') + ')';
-		return this.replace(match);
+	function escapeRegex(string){
+		return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 	}
+	
+	String.prototype.trimChars = function (chars) {
+		var match = '(' + chars.split('').map(escapeRegex).join('|') + ')';
+		return this.replace(new RegExp(match), '');
+	};
 	
 	function stripHashtags(str) {
 		return str.replace(/#[a-zA-Z0-9]+/i, '');
@@ -40,19 +44,23 @@ console.log('content script running');
 		}
 	}
 	
+	console.log('http://waterpigs.co.uk/notes/4RwFW_/ is a URL?', isUrl('http://waterpigs.co.uk/notes/4RwFW_/'));
+	
 	function getTrailingUrl(str) {
 		var parts,
 				lastSegment,
 				url;
 		
 		parts = str.split(/\s/);
-		parts = parts.filter(function (i) { return i !== ''; });
+		parts = parts.filter(function (i) { return i === ')' || i !== ''; });
+		parts = parts.map(function (i) { return i.trimChars('()'); });
+		console.log(parts);
+		
 		lastSegment = parts.pop();
 		
 		if (isUrl(lastSegment)) {
+			console.log(lastSegment, 'is a URL');
 			url = lastSegment;
-		} else if (lastSegment.charAt(0) === '(' && isUrl(lastSegment.trimChars('()'))) {
-			url = lastSegment.trimChars('()');
 		}
 		
 		if (url !== null && url !== '' && url !== undefined) {
@@ -77,15 +85,20 @@ console.log('content script running');
 			url: potentialPosseUrl
 		}, function (result) {
 			// TODO: make this more robust — cast to string and check first char
-			if ([404, 410, 500].indexOf(result.status) && result.response !== null) {
-				console.log('HTTP Request failed', potentialPosseUrl, request);
+			if ([404, 410, 500].indexOf(result.status) !== -1 || result.response === null) {
+				console.log('HTTP Request failed', potentialPosseUrl, result);
 				return;
 			}
+			console.log(result);
 			
-			var syndicationLinks = result.response.querySelectorAll('.u-syndication')
-			if (syndicationLinks.length == 0)
+			var respDoc = document.implementation.createHTMLDocument('response');
+			respDoc.documentElement.innerHTML = result.response;
+			
+			var syndicationLinks = respDoc.querySelectorAll('.u-syndication')
+			if (syndicationLinks.length === 0)
 				return;
 			
+			console.log('Found syndication links:', syndicationLinks);
 			// Check all syndication links to match tweetUrl
 			// TODO: redirects and stuff
 			for (var i=0; i<syndicationLinks.length;i++) {
@@ -94,7 +107,9 @@ console.log('content script running');
 					continue;
 				
 				// They match! awesome. Grab the e-content of the original content
+				console.log('Found matching syndication link', link);
 				var originalContent = result.response.querySelector('.h-entry .e-content');
+				console.log('Replacing tweet content with original:', originalContent);
 				tweetText.innerHTML = originalContent.innerHTML;
 				return;
 			}
