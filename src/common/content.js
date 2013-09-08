@@ -1,6 +1,7 @@
 // ==UserScript==
 // @include https://twitter.com
 // @include http://twitter.com
+// @require cassis.js
 // ==/UserScript==
 
 console.log('content script running');
@@ -43,16 +44,13 @@ console.log('content script running');
 
 		if (urlHost(lastSegment)) {
 			url = lastSegment;
-		} else if (lastSegment === '(' && urlHost(lastSegment.trim('()'))) {
-			url = lastSegment.trim('()');
+		} else if (lastSegment === '(' && urlHost(lastSegment.trimChars('()'))) {
+			url = lastSegment.trimChars('()');
 		}
-
-		if (isset($url)) {
-			ob_start();
-			$url = web_address_to_uri($url, true);
-			ob_end_clean();
-
-			return trim(cleanString($url));
+		
+		if (url !== null || url !== '') {
+			url = web_address_to_uri(url, true);
+			return url.trim();
 		}
 
 		return null;
