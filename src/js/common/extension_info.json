@@ -1,11 +1,14 @@
 {
 	"content_scripts": [],
 	"homepage_url": "http://kangoextensions.com/",
-	"version": "0.9.0",
-	"name": "Extension name",
-	"creator": "Kango",
+	"version": "0.1.0",
+	"name": "Weave",
+	"creator": "IndieWebCamp",
 	"background_scripts": [
 		"main.js"
+	],
+	"content_scripts": [
+		"content.js"
 	],
 	"browser_button": {
 		"caption": "Kango",
