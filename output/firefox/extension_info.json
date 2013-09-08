@@ -1,0 +1,16 @@
+{
+  "kango_version": "1.2.4 744e69cf4136", 
+  "content_scripts": [
+    "content.js"
+  ], 
+  "description": "Extension description", 
+  "creator": "Kango", 
+  "package_id": "kango-638f2538-fdfa-4086-8a6b-18995a0e4699", 
+  "background_scripts": [
+    "main.js"
+  ], 
+  "homepage_url": "http://kangoextensions.com/", 
+  "version": "0.9.0", 
+  "id": "{638F2538-FDFA-4086-8A6B-18995A0E4699}", 
+  "name": "Weave"
+}

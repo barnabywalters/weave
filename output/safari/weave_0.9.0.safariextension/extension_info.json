@@ -1,0 +1,16 @@
+{
+  "kango_version": "1.2.4 744e69cf4136", 
+  "content_scripts": [
+    "content.js"
+  ], 
+  "description": "Extension description", 
+  "creator": "Kango", 
+  "developer_id": "YOUR_SAFARI_DEVELOPER_ID", 
+  "background_scripts": [
+    "main.js"
+  ], 
+  "homepage_url": "http://kangoextensions.com/", 
+  "version": "0.9.0", 
+  "id": "com.kangoextensions.weave", 
+  "name": "Weave"
+}
