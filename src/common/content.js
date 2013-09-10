@@ -48,8 +48,6 @@
 		
 		parts = str.split(/\s/);
 		parts = parts.filter(function (i) { return i !== ')' && i !== ''; });
-		var p = parts;
-		console.log(p);
 		parts = parts.map(function (i) { return i.trimChars('()'); });
 		
 		lastSegment = parts.pop();
