@@ -99,6 +99,8 @@
 
 					// They match! awesome. Grab the e-content of the original content
 					var originalContent = respDoc.querySelector('.h-entry .e-content');
+					// TODO: expand relative URLs in the original content
+					// can we just loop through elements with src, href and el.href = el.href?
 					tweetText.innerHTML = originalContent.innerHTML;
 					return;
 				}
