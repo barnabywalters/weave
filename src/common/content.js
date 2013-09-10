@@ -19,7 +19,8 @@
 	
 	String.prototype.trimChars = function (chars) {
 		var match = '(' + chars.split('').map(escapeRegex).join('|') + ')';
-		return this.replace(new RegExp(match), '');
+		chars = this.replace(new RegExp('^' + match + '+', 'g'), '');
+		return chars.replace(new RegExp(match + '+$', 'g'), '');
 	};
 	
 	function stripHashtags(str) {
@@ -46,7 +47,9 @@
 				url;
 		
 		parts = str.split(/\s/);
-		parts = parts.filter(function (i) { return i === ')' || i !== ''; });
+		parts = parts.filter(function (i) { return i !== ')' && i !== ''; });
+		var p = parts;
+		console.log(p);
 		parts = parts.map(function (i) { return i.trimChars('()'); });
 		
 		lastSegment = parts.pop();

@@ -19,7 +19,8 @@
 	
 	String.prototype.trimChars = function (chars) {
 		var match = '(' + chars.split('').map(escapeRegex).join('|') + ')';
-		return this.replace(new RegExp(match), '');
+		chars = this.replace(new RegExp('^' + match + '+', 'g'), '');
+		return chars.replace(new RegExp(match + '+$', 'g'), '');
 	};
 	
 	function stripHashtags(str) {
@@ -46,7 +47,9 @@
 				url;
 		
 		parts = str.split(/\s/);
-		parts = parts.filter(function (i) { return i === ')' || i !== ''; });
+		parts = parts.filter(function (i) { return i !== ')' && i !== ''; });
+		var p = parts;
+		console.log(p);
 		parts = parts.map(function (i) { return i.trimChars('()'); });
 		
 		lastSegment = parts.pop();
@@ -89,9 +92,7 @@
 				var syndicationLinks = respDoc.querySelectorAll('.u-syndication')
 				if (syndicationLinks.length === 0)
 					return;
-
-				console.log('Found syndication links:', syndicationLinks);
-				console.log('searching for URL:', tweetUrl);
+				
 				// Check all syndication links to match tweetUrl
 				// TODO: redirects and stuff
 				for (var i=0; i<syndicationLinks.length;i++) {
@@ -100,9 +101,9 @@
 						continue;
 
 					// They match! awesome. Grab the e-content of the original content
-					console.log('Found matching syndication link', link);
 					var originalContent = respDoc.querySelector('.h-entry .e-content');
-					console.log('Replacing tweet content with original:', originalContent);
+					// TODO: expand relative URLs in the original content
+					// can we just loop through elements with src, href and el.href = el.href?
 					tweetText.innerHTML = originalContent.innerHTML;
 					return;
 				}
