@@ -48,8 +48,6 @@
 		
 		parts = str.split(/\s/);
 		parts = parts.filter(function (i) { return i !== ')' && i !== ''; });
-		var p = parts;
-		console.log(p);
 		parts = parts.map(function (i) { return i.trimChars('()'); });
 		
 		lastSegment = parts.pop();
@@ -104,6 +102,7 @@
 					var originalContent = respDoc.querySelector('.h-entry .e-content');
 					// TODO: expand relative URLs in the original content
 					// can we just loop through elements with src, href and el.href = el.href?
+					// TODO: HTML replacement causing safari to crash for some reason
 					tweetText.innerHTML = originalContent.innerHTML;
 					return;
 				}

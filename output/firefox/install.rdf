@@ -11,9 +11,9 @@
             </Description>
         </em:targetApplication>
         <em:bootstrap>true</em:bootstrap>
-		<em:description>Extension description</em:description>
-        <em:creator>Kango</em:creator>
-		<em:homepageURL>http://kangoextensions.com/</em:homepageURL>
+		<em:description>Weave indieweb content into your twitter stream — expands truncated POSSE copies</em:description>
+        <em:creator>IndieWebCamp</em:creator>
+		<em:homepageURL>http://indiewebcamp.com</em:homepageURL>
 		<em:iconURL>chrome://kango-638f2538-fdfa-4086-8a6b-18995a0e4699/content/icons/icon32.png</em:iconURL>
 		
 		

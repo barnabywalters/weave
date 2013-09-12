@@ -102,6 +102,7 @@
 					var originalContent = respDoc.querySelector('.h-entry .e-content');
 					// TODO: expand relative URLs in the original content
 					// can we just loop through elements with src, href and el.href = el.href?
+					// TODO: HTML replacement causing safari to crash for some reason
 					tweetText.innerHTML = originalContent.innerHTML;
 					return;
 				}

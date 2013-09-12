@@ -3,12 +3,12 @@
   "content_scripts": [
     "content.js"
   ], 
-  "description": "Extension description", 
-  "creator": "Kango", 
+  "description": "Weave indieweb content into your twitter stream \u2014 expands truncated POSSE copies", 
+  "creator": "IndieWebCamp", 
   "background_scripts": [
     "main.js"
   ], 
-  "homepage_url": "http://kangoextensions.com/", 
+  "homepage_url": "http://indiewebcamp.com", 
   "version": "0.9.0", 
   "id": "http://indiewebcamp.com/weave/", 
   "name": "Weave"

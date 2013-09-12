@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Author</key>
-	<string>Kango</string>
+	<string>IndieWebCamp</string>
 	<key>Builder Version</key>
 	<string>6534.59.8</string>
 	<key>CFBundleDisplayName</key>
@@ -52,7 +52,7 @@
 		</array>
 	</dict>
 	<key>Description</key>
-	<string>Extension description</string>
+	<string>Weave indieweb content into your twitter stream — expands truncated POSSE copies</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>
@@ -68,6 +68,6 @@
 	<key>Update Manifest URL</key>
 	<string></string>
 	<key>Website</key>
-	<string>http://kangoextensions.com/</string>
+	<string>http://indiewebcamp.com</string>
 </dict>
 </plist>
