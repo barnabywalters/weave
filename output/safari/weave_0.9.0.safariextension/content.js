@@ -120,7 +120,12 @@
 						}
 					}
 					
-					tweetText.innerHTML = originalContent.innerHTML;
+					var elToConstrain = originalContent.querySelectorAll('*');
+					for (var i=0; i<elToConstrain.length;i++) {
+						elToConstrain[i].style.maxWidth = '100%';
+					}
+					
+					tweetText.innerHTML = originalContent.innerHTML.trim();
 					return;
 				}
 			});
