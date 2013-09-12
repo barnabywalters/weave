@@ -27,6 +27,12 @@
 		return str.replace(/#[a-zA-Z0-9]+/i, '');
 	}
 	
+	function urlOrigin(str) {
+		var parser = document.createElement('a');
+		parser.href = str;
+		return parser.origin;
+	}
+	
 	function isUrl(str) {
 		var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
 		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -100,9 +106,20 @@
 
 					// They match! awesome. Grab the e-content of the original content
 					var originalContent = respDoc.querySelector('.h-entry .e-content');
-					// TODO: expand relative URLs in the original content
-					// can we just loop through elements with src, href and el.href = el.href?
-					// TODO: HTML replacement causing safari to crash for some reason
+					
+					var hrefToExpand = originalContent.querySelectorAll('[href]');
+					for (var i=0; i<hrefToExpand.length;i++) {
+						if (hrefToExpand[i].hostname === '') {
+							hrefToExpand[i].setAttribute('href', urlOrigin(potentialPosseUrl) + hrefToExpand[i].href);
+						}
+					}
+					var srcToExpand = originalContent.querySelectorAll('[src]');
+					for (var i=0; i<srcToExpand.length;i++) {
+						if (srcToExpand[i].hostname === '') {
+							hrefToExpand[i].setAttribute('src', urlOrigin(potentialPosseUrl) + srcToExpand[i].src);
+						}
+					}
+					
 					tweetText.innerHTML = originalContent.innerHTML;
 					return;
 				}
