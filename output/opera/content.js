@@ -74,6 +74,8 @@
 		(function (tweetEl) {
 			var tweetText = tweetEl.querySelector('.tweet-text'),
 					tweetUrl = tweetEl.querySelector('.tweet-timestamp').href,
+					tweetAuthorEl = tweetEl.querySelector('.account-group'),
+					tweetPermalinkEl = tweetEl.querySelector('.tweet-timestamp'),
 					potentialPosseUrl = getTrailingUrl(stripHashtags(tweetText.innerText));
 
 			if (potentialPosseUrl === null)
@@ -105,7 +107,10 @@
 						continue;
 
 					// They match! awesome. Grab the e-content of the original content
+					// TODO: refine this, maybe use an actual mf parser
 					var originalContent = respDoc.querySelector('.h-entry .e-content');
+					var author = respDoc.querySelector('.h-entry .p-author');
+					var authorUrl = author.href || author.querySelector('.u-url').href;
 					
 					var hrefToExpand = originalContent.querySelectorAll('[href]');
 					for (var i=0; i<hrefToExpand.length;i++) {
@@ -126,6 +131,9 @@
 					}
 					
 					tweetText.innerHTML = originalContent.innerHTML.trim();
+					tweetAuthorEl.href = authorUrl;
+					tweetAuthorEl.querySelector('.username').innerText = authorUrl;
+					tweetPermalinkEl.href = potentialPosseUrl;
 					return;
 				}
 			});
