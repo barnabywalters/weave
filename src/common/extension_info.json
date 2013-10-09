@@ -1,10 +1,6 @@
 {
-  "content_scripts": [], 
   "description": "Weave indieweb content into your twitter stream — expands truncated POSSE copies", 
-  "creator": "IndieWebCamp", 
-  "background_scripts": [
-    "main.js"
-  ],
+  "creator": "IndieWebCamp",
 	"content_scripts": [
 		"content.js"
 	],

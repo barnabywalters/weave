@@ -6,9 +6,6 @@
   "description": "Weave indieweb content into your twitter stream \u2014 expands truncated POSSE copies", 
   "creator": "IndieWebCamp", 
   "developer_id": "YOUR_SAFARI_DEVELOPER_ID", 
-  "background_scripts": [
-    "main.js"
-  ], 
   "homepage_url": "http://indiewebcamp.com", 
   "version": "0.9.0", 
   "id": "com.indiewebcamp.weave", 

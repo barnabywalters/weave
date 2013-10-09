@@ -5,7 +5,10 @@
 // ==/UserScript==
 
 (function (document) {
-	var tweets = document.querySelectorAll('.stream-items .tweet');
+	'use strict';
+	console.log("Weaving…");
+	var tweets = document.querySelectorAll('.stream-items .tweet'),
+		i = 0;
 	
 	if (!String.prototype.trim) {
 		String.prototype.trim = function () {
@@ -14,7 +17,7 @@
 	}
 	
 	function escapeRegex(string){
-		return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+		return string.replace(/([.*+?\^=!:${}()|\[\]\/\\])/g, "\\$1");
 	}
 	
 	String.prototype.trimChars = function (chars) {
@@ -42,9 +45,8 @@
 		'(\\#[-a-z\\d_]*)?$','i'); // fragment locator
 		if(!pattern.test(str)) {
 			return false;
-		} else {
-			return true;
 		}
+		return true;
 	}
 	
 	function getTrailingUrl(str) {
@@ -70,18 +72,18 @@
 		return null;
 	}
 	
-	for (var i=0;i<tweets.length;i++) {
+	for (i=0; i<tweets.length; i=i+1) {
 		(function (tweetEl) {
 			var tweetText = tweetEl.querySelector('.tweet-text'),
 					tweetUrl = tweetEl.querySelector('.tweet-timestamp').href,
 					tweetAuthorEl = tweetEl.querySelector('.account-group'),
 					tweetPermalinkEl = tweetEl.querySelector('.tweet-timestamp'),
-					potentialPosseUrl = getTrailingUrl(stripHashtags(tweetText.innerText));
-
-			if (potentialPosseUrl === null)
+					potentialPosseUrl = getTrailingUrl(stripHashtags(tweetText.textContent));
+			if (potentialPosseUrl === null) {
 				return;
+			}
 			// TODO: check if domain is in blacklist, ignore if so
-
+			
 			kango.xhr.send({
 				method: 'GET',
 				url: potentialPosseUrl
@@ -91,13 +93,13 @@
 					console.log('HTTP Request failed', potentialPosseUrl, result);
 					return;
 				}
-				
 				var respDoc = document.implementation.createHTMLDocument('response');
 				respDoc.documentElement.innerHTML = result.response;
 
-				var syndicationLinks = respDoc.querySelectorAll('.u-syndication')
-				if (syndicationLinks.length === 0)
+				var syndicationLinks = respDoc.querySelectorAll('.u-syndication');
+				if (syndicationLinks.length === 0) {
 					return;
+				}
 				
 				// Check all syndication links to match tweetUrl
 				// TODO: redirects and stuff
@@ -132,7 +134,7 @@
 					
 					tweetText.innerHTML = originalContent.innerHTML.trim();
 					tweetAuthorEl.href = authorUrl;
-					tweetAuthorEl.querySelector('.username').innerText = authorUrl;
+					tweetAuthorEl.querySelector('.username').textContent = authorUrl;
 					tweetPermalinkEl.href = potentialPosseUrl;
 					return;
 				}
