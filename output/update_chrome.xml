@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><gupdate protocol="2.0" xmlns="http://www.google.com/update2/response">
+	<app appid="cmpelcdomefnimidedgfhncdkelfggop">
+		<updatecheck codebase="http://waterpigs.co.uk/extensions/weave/weave_0.9.0.crx" version="0.9.0"/>
+	</app>
+</gupdate>

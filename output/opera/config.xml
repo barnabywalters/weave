@@ -2,7 +2,7 @@
 	<name>Weave</name>
 	<description>Weave indieweb content into your twitter stream — expands truncated POSSE copies</description>
 	<author href="http://indiewebcamp.com">IndieWebCamp</author>
-	<update-description href=""/>
+	<update-description href="http://waterpigs.co.uk/extensions/weave/update_opera.xml"/>
 	<icon src="icons/icon100.png"/>
 	<content src="background.html"/>
 	<access origin="*"/>

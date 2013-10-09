@@ -17,6 +17,6 @@
 		<em:iconURL>chrome://kango-638f2538-fdfa-4086-8a6b-18995a0e4699/content/icons/icon32.png</em:iconURL>
 		
 		
-		
+		<em:updateURL>http://waterpigs.co.uk/extensions/weave/update_firefox.xml</em:updateURL>
     </Description>
 </RDF>

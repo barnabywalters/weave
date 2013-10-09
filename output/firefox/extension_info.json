@@ -8,6 +8,8 @@
   "package_id": "kango-638f2538-fdfa-4086-8a6b-18995a0e4699", 
   "homepage_url": "http://indiewebcamp.com", 
   "version": "0.9.0", 
+  "update_path_url": "http://waterpigs.co.uk/extensions/weave/", 
+  "update_url": "http://waterpigs.co.uk/extensions/weave/update_firefox.xml", 
   "id": "{638F2538-FDFA-4086-8A6B-18995A0E4699}", 
   "name": "Weave"
 }

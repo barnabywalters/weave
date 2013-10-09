@@ -12,6 +12,7 @@
       ]
     }
   ], 
+  "update_url": "http://waterpigs.co.uk/extensions/weave/update_chrome.xml", 
   "name": "Weave", 
   "icons": {
     "128": "icons/icon128.png", 
