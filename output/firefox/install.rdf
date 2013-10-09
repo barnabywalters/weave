@@ -2,7 +2,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>{638F2538-FDFA-4086-8A6B-18995A0E4699}</em:id>
         <em:name>Weave</em:name>
-        <em:version>0.9.0</em:version>
+        <em:version>0.9.1</em:version>
         <em:targetApplication>
             <Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
@@ -17,6 +17,6 @@
 		<em:iconURL>chrome://kango-638f2538-fdfa-4086-8a6b-18995a0e4699/content/icons/icon32.png</em:iconURL>
 		
 		
-		<em:updateURL>http://waterpigs.co.uk/extensions/weave/update_firefox.xml</em:updateURL>
+		
     </Description>
 </RDF>

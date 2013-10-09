@@ -6,9 +6,7 @@
   "description": "Weave indieweb content into your twitter stream \u2014 expands truncated POSSE copies", 
   "creator": "IndieWebCamp", 
   "homepage_url": "http://indiewebcamp.com", 
-  "version": "0.9.0", 
-  "update_path_url": "http://waterpigs.co.uk/extensions/weave/", 
-  "update_url": "http://waterpigs.co.uk/extensions/weave/update_opera.xml", 
+  "version": "0.9.1", 
   "id": "http://indiewebcamp.com/weave/", 
   "name": "Weave"
 }

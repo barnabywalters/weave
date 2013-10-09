@@ -6,9 +6,10 @@
 
 (function (document) {
 	'use strict';
-	console.log("Weaving…");
 	var tweets = document.querySelectorAll('.stream-items .tweet'),
 		i = 0;
+	
+	console.log("Weaving…");
 	
 	if (!String.prototype.trim) {
 		String.prototype.trim = function () {
@@ -96,7 +97,7 @@
 				var respDoc = document.implementation.createHTMLDocument('response');
 				respDoc.documentElement.innerHTML = result.response;
 
-				var syndicationLinks = respDoc.querySelectorAll('.u-syndication');
+				var syndicationLinks = respDoc.querySelectorAll('.u-syndication, [rel~=syndication]');
 				if (syndicationLinks.length === 0) {
 					return;
 				}
@@ -111,8 +112,10 @@
 					// They match! awesome. Grab the e-content of the original content
 					// TODO: refine this, maybe use an actual mf parser
 					var originalContent = respDoc.querySelector('.h-entry .e-content');
-					var author = respDoc.querySelector('.h-entry .p-author');
-					var authorUrl = author.href || author.querySelector('.u-url').href;
+					var author = respDoc.querySelector('.h-entry .p-author'), authorUrl = null;
+					if (author !== null) {
+						authorUrl = author.href || author.querySelector('.u-url').href;
+					}
 					
 					var hrefToExpand = originalContent.querySelectorAll('[href]');
 					for (var i=0; i<hrefToExpand.length;i++) {
@@ -133,8 +136,10 @@
 					}
 					
 					tweetText.innerHTML = originalContent.innerHTML.trim();
-					tweetAuthorEl.href = authorUrl;
-					tweetAuthorEl.querySelector('.username').textContent = authorUrl;
+					if (author !== null) {
+						tweetAuthorEl.href = authorUrl;
+						tweetAuthorEl.querySelector('.username').textContent = authorUrl;
+					}
 					tweetPermalinkEl.href = potentialPosseUrl;
 					return;
 				}

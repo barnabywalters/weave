@@ -1,8 +1,8 @@
-<?xml version="1.0" ?><widget id="http://indiewebcamp.com/weave/" version="0.9.0" xmlns="http://www.w3.org/ns/widgets">
+<?xml version="1.0" ?><widget id="http://indiewebcamp.com/weave/" version="0.9.1" xmlns="http://www.w3.org/ns/widgets">
 	<name>Weave</name>
 	<description>Weave indieweb content into your twitter stream — expands truncated POSSE copies</description>
 	<author href="http://indiewebcamp.com">IndieWebCamp</author>
-	<update-description href="http://waterpigs.co.uk/extensions/weave/update_opera.xml"/>
+	<update-description href=""/>
 	<icon src="icons/icon100.png"/>
 	<content src="background.html"/>
 	<access origin="*"/>

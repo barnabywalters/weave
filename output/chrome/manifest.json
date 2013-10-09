@@ -12,7 +12,6 @@
       ]
     }
   ], 
-  "update_url": "http://waterpigs.co.uk/extensions/weave/update_chrome.xml", 
   "name": "Weave", 
   "icons": {
     "128": "icons/icon128.png", 
@@ -27,7 +26,7 @@
     "page": "background.html"
   }, 
   "homepage_url": "http://indiewebcamp.com", 
-  "version": "0.9.0", 
+  "version": "0.9.1", 
   "manifest_version": 2, 
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'", 
   "permissions": [
